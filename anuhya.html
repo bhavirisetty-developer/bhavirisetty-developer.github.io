@@ -3,159 +3,553 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Biodata & Services</title>
+    <title>The Anuhya's Maddali Boutique</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://www.bhavirisetty.in/anumedia/profile.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Basic Setup */
+        :root {
+            --color-primary: #8B4513; /* SaddleBrown */
+            --color-secondary: #FFD700; /* Gold */
+            --color-text: #362512; /* Darker brown */
+            --color-background: #F8F4E3; /* Light cream */
+            --color-accent: #E0B589; /* Tan */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lora', serif;
+            --container-padding: 2rem;
+        }
+
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: var(--font-body);
+            background-color: var(--color-background);
+            color: var(--color-text);
             line-height: 1.6;
         }
+
         .container {
-            max-width: 960px;
-            margin: auto;
-            overflow: hidden;
-            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
         }
-        header {
-            background: #005f73;
-            color: #ffffff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #94d2bd 3px solid;
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--color-primary);
             text-align: center;
         }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 4rem 0;
         }
-        .biodata-card {
-            background: #ffffff;
-            margin-top: 20px;
-            padding: 20px;
+        header .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--color-primary);
+        }
+
+        /* Bio Section */
+        .bio-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            background-color: #fff;
+            padding: 2rem;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .bio-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background-color: var(--color-accent);
+            border: 5px solid var(--color-secondary);
             display: flex;
             align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
         }
-        .biodata-card .profile-img {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-        }
-        .biodata-card .bio-details {
-            flex-grow: 1;
-        }
-        .services {
-            margin-top: 40px;
-            background: #ffffff;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .services h2 {
-            text-align: center;
-            color: #005f73;
-        }
-        .service-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .service-item {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            transition: transform 0.2s;
-        }
-        .service-item:hover {
-            transform: translateY(-5px);
-        }
-        .service-item img {
+        .bio-image img {
             width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 8px;
+            height: 100%;
+            object-fit: contain; /* The corrected property to prevent cropping */
+            border-radius: 50%;
         }
+        .bio-content {
+            text-align: center;
+        }
+        .bio-content h2 {
+            margin-top: 0;
+        }
+        .bio-content p {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Galleries */
+        .galleries-section {
+            padding: 4rem 0;
+        }
+        .galleries-section h2 {
+            margin-bottom: 2rem;
+        }
+
+        .galleries-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            margin-bottom: 2rem;
+        }
+
+        .gallery-item-content {
+            background-color: #fff;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .gallery-item-content h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-item-content p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Carousel */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 350px; /* Adjust height as needed */
+        }
+
+        .carousel-slides {
+            display: flex;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            background-color: var(--color-background);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #ccc;
+        }
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+            padding: 0 0.5rem;
+        }
+
+        .carousel-nav-button {
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 50%;
+            line-height: 1;
+            transition: background 0.3s ease;
+        }
+        .carousel-nav-button:hover {
+            background: rgba(0,0,0,0.7);
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            color: #ffffff;
-            background: #005f73;
+            padding: 2rem 0;
+            border-top: 1px solid var(--color-accent);
+            margin-top: 4rem;
         }
-        @media (max-width: 600px) {
-            .biodata-card {
-                flex-direction: column;
-                text-align: center;
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .bio-section {
+                flex-direction: row;
+                text-align: left;
+                padding: 4rem;
             }
-            .biodata-card .profile-img {
-                margin: auto;
+            .bio-content {
+                text-align: left;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .bio-section {
+                padding: 6rem;
+            }
+            .galleries-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        /* Floating Contact Button */
+        .contact-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .contact-button {
+            width: 60px;
+            height: 60px;
+            background-color: var(--color-primary);
+            color: var(--color-background);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        .contact-button:hover {
+            animation: none;
+        }
+
+        .contact-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(20px);
+        }
+
+        .contact-options.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .contact-options a {
+            text-decoration: none;
+            color: var(--color-text);
+            background-color: var(--color-background);
+            padding: 0.75rem 1rem;
+            border-radius: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .contact-options a:hover {
+            background-color: var(--color-accent);
+        }
+
+        /* Icons (using a simple text-based icon here) */
+        .contact-button .icon {
+            font-size: 1.5rem;
+        }
+        .contact-options .icon {
+            font-size: 1rem;
+        }
+        
+        /* Keyframe Animation */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
             }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <h1>Venkata Sai Anuhya Maddali</h1>
-        </div>
-    </header>
-
     <div class="container">
-        <!-- Biodata Section -->
-        <section class="biodata-card">
-            <img src="https://via.placeholder.com/150/94d2bd/ffffff?text=Profile+Image" alt="Profile Picture" class="profile-img">
-            <div class="bio-details">
-                <h2>About Me</h2>
-                <p>Hello! I'm Jane Doe, a passionate web developer with a keen eye for design and a love for clean code. With over 5 years of experience, I specialize in creating modern, responsive, and user-friendly websites. I enjoy turning complex problems into simple, beautiful, and intuitive designs.</p>
-                <ul>
-                    <li><strong>Email:</strong> janedoe@example.com</li>
-                    <li><strong>Location:</strong> City, Country</li>
-                    <li><strong>Expertise:</strong> Web Development, UI/UX Design</li>
-                </ul>
+        <header>
+            <a href="#" class="logo">The Anuhya's Maddali Boutique</a>
+        </header>
+
+        <section class="bio-section">
+            <div class="bio-image">
+                <img src="https://www.bhavirisetty.in/anumedia/profile.jpeg" alt="Profile of the Designer">
+            </div>
+            <div class="bio-content">
+                <h2>The Designer's Story</h2>
+                <p>
+                    Hi, I'm Anuhya, and I am a fashion designer specializing in fabric painting. For more than 15 years, I have been pouring my creativity and passion into every brushstroke and design. While my degrees in Fashion Technology and an MBA gave me the strategic knowledge to build a business, my family life as a mother of two has been my greatest inspiration. My work is a reflection of this journey—a perfect blend of technical skill, business savvy, and a touch of heartfelt emotion. I create unique, custom-designed dresses for clients who appreciate artful craftsmanship and personal stories woven into their fashion. I believe every dress should tell a story, and I am committed to helping my clients wear a piece of their own narrative.
+                </p>
             </div>
         </section>
 
-        <!-- Services Section -->
-        <section class="services">
-            <h2>Services I Offer</h2>
-            <div class="service-list">
-                <div class="service-item">
-                    <img src="https://via.placeholder.com/300x180/0a9396/ffffff?text=Web+Design" alt="Web Design Placeholder">
-                    <h3>Web Design</h3>
-                    <p>Creating beautiful, modern, and responsive websites that provide an excellent user experience.</p>
+        <section class="galleries-section">
+            <h2>Services Offered</h2>
+            <div class="galleries-container">
+                <!-- Gallery 1 -->
+                <div class="gallery-item">
+                    <div class="gallery-item-content">
+                        <h3>Brush & Bloom</h3>
+                        <p>
+                            Fabric painting transforms plain textiles into personalized works of art, adding vibrant patterns and unique designs to any piece. It's a creative and accessible way to express your style and give new life to your clothing or home décor. With fabric painting, you can make a wardrobe with custom colors by learning to apply your own beautiful, long-lasting designs. <a href="https://www.bhavirisetty.in/anumedia/brushbloom/download1.jpeg" download="Brush-Bloom.jpeg" target="_blank">View Brochure</a>
+                        </p>
+                    </div>
+                    <div class="carousel" id="carousel-1">
+                        <div class="carousel-slides">
+                            <div class="carousel-slide active">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img1.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img2.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img3.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img4.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img5.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img6.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img7.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img8.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img9.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img10.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img11.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img12.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img13.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img14.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/brushbloom/img15.jpeg" class="carousel-slide-image">
+                            </div>
+                        </div>
+                        <div class="carousel-nav">
+                            <button class="carousel-nav-button prev">❮</button>
+                            <button class="carousel-nav-button next">❯</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="service-item">
-                    <img src="https://via.placeholder.com/300x180/005f73/ffffff?text=Development" alt="Development Placeholder">
-                    <h3>Web Development</h3>
-                    <p>Building robust and scalable web applications using the latest technologies.</p>
+
+                <!-- Gallery 2 -->
+                <div class="gallery-item">
+                    <div class="gallery-item-content">
+                        <h3>Soundarya Vastra</h3>
+                        <p>
+                            Transform fabrics with skilled craftsmanship, from meticulous saree finishing to tailored dress stitching. We specialize in intricate maggam work, a traditional embroidery technique using beads, sequins, and threads to create stunning, one-of-a-kind designs. These bespoke services ensure every garment fits perfectly and showcases exquisite, personalized detail. <a href="https://www.bhavirisetty.in/anumedia/soundaryavastra/download1.jpeg" download="Soundarya-Vastra.jpeg" target="_blank">View Brochure</a>
+                        </p>
+                    </div>
+                    <div class="carousel" id="carousel-2">
+                        <div class="carousel-slides">
+                            <div class="carousel-slide active">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img1.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img2.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img3.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img4.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img5.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img6.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img7.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img8.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img9.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img10.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img11.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img12.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img13.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img14.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img15.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img16.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img17.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img18.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/soundaryavastra/img19.jpeg" class="carousel-slide-image">
+                            </div>
+                        </div>
+                        <div class="carousel-nav">
+                            <button class="carousel-nav-button prev">❮</button>
+                            <button class="carousel-nav-button next">❯</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="service-item">
-                    <img src="https://via.placeholder.com/300x180/94d2bd/000000?text=Consulting" alt="Consulting Placeholder">
-                    <h3>Technical Consulting</h3>
-                    <p>Offering expert advice to help businesses improve their online presence and digital strategy.</p>
-                </div>
-                <div class="service-item">
-                    <img src="https://via.placeholder.com/300x180/e9d8a6/000000?text=Maintenance" alt="Maintenance Placeholder">
-                    <h3>Website Maintenance</h3>
-                    <p>Providing ongoing support and maintenance to ensure your site is secure and up-to-date.</p>
+
+                <!-- Gallery 3 -->
+                <div class="gallery-item">
+                    <div class="gallery-item-content">
+                        <h3>Telugu Palukulu</h3>
+                        <p>
+                            Join our comprehensive Telugu language program to master reading, writing, and speaking all the letters and fundamentals. This course empowers you to confidently interact with your elders, from parents to grandparents, and build deeper family connections. By learning Telugu, you will help keep our beautiful language and rich heritage alive for generations to come. <a href="https://www.bhavirisetty.in/anumedia/telugupalukulu/download1.jpeg" download="Telugu-Palukulu.jpeg" target="_blank">View Brochure</a>
+                        </p>
+                    </div>
+                    <div class="carousel" id="carousel-3">
+                        <div class="carousel-slides">
+                            <div class="carousel-slide active">
+                                <img src="https://www.bhavirisetty.in/anumedia/telugupalukulu/img1.jpeg" class="carousel-slide-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://www.bhavirisetty.in/anumedia/telugupalukulu/img1.jpeg" class="carousel-slide-image">
+                            </div>
+                        </div>
+                        <div class="carousel-nav">
+                            <button class="carousel-nav-button prev">❮</button>
+                            <button class="carousel-nav-button next">❯</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <footer>
+            <p>&copy; 2025 The Anuhya's Maddali Boutique. All rights reserved.</p>
+        </footer>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Jane Doe. All Rights Reserved.</p>
+    <!-- Floating Contact Widget -->
+    <div class="contact-widget">
+        <div class="contact-button" id="contactButton">
+            <span class="icon">&#9993;</span> <!-- Mail icon -->
         </div>
-    </footer>
+        <div class="contact-options" id="contactOptions">
+            <a href="tel:+19496828486">
+                <span class="icon">&#9742;</span>
+                Call Us
+            </a>
+            <a href="mailto:srianuhya9@gmail.com">
+                <span class="icon">&#9993;</span>
+                Email Us
+            </a>
+        </div>
+    </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousels = document.querySelectorAll('.carousel');
+
+            carousels.forEach(carousel => {
+                const slides = carousel.querySelectorAll('.carousel-slide');
+                const prevBtn = carousel.querySelector('.prev');
+                const nextBtn = carousel.querySelector('.next');
+                let currentIndex = 0;
+
+                function updateCarousel() {
+                    slides.forEach((slide, index) => {
+                        slide.classList.remove('active');
+                        if (index === currentIndex) {
+                            slide.classList.add('active');
+                        }
+                    });
+                }
+
+                prevBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                    updateCarousel();
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    updateCarousel();
+                });
+            });
+
+            // Contact widget functionality
+            const contactButton = document.getElementById('contactButton');
+            const contactOptions = document.getElementById('contactOptions');
+
+            contactButton.addEventListener('click', () => {
+                contactOptions.classList.toggle('show');
+            });
+        });
+    </script>
 </body>
 </html>
